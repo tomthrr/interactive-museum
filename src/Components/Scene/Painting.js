@@ -4,19 +4,25 @@ import {Suspense, useRef} from "react";
 import gsap from "gsap";
 import {PerspectiveCamera, useHelper} from "@react-three/drei";
 
-const picturesNames = [
+const paintingsInfos = [
   {
-    name: 'haystack-snow-effect.jpg'
+    name: 'haystack-snow-effect.jpg',
+    position: [0, 1, -3.98],
+    cameraPos: {
+      x: 0,
+      y: 1,
+      z: -3
+    }
   }
 ]
 
-function Image({ name, onImageClick }) {
-  const texture = useLoader(THREE.TextureLoader, '/pictures_monet/' + name);
+function Image({ painting, onImageClick }) {
+  const texture = useLoader(THREE.TextureLoader, '/pictures_monet/' + painting.name);
 
   return (
     <mesh
-      position={[0, 1, -3.98]} // Position du tableau
-      onClick={(e) => onImageClick(e.object)} // Passe l'objet cliqué
+      position={painting.position} // Position du tableau
+      onClick={(e) => onImageClick(e.object, painting.cameraPos)} // Passe l'objet cliqué
     >
       <planeGeometry attach="geometry" args={[1, 3 / 5]} />
       <meshBasicMaterial attach="material" map={texture} toneMapped={false} />
@@ -25,64 +31,34 @@ function Image({ name, onImageClick }) {
 }
 
 export default function Painting() {
-  const { camera } = useThree();
+  const { camera, controls } = useThree();
   const cameraRef = useRef();
 
-  const handleImageClick = (mesh) => {
-    const position = mesh.position;
-    const normalOffset = 2;
+  const handleImageClick = (mesh, cameraPos) => {
+    // Set the correct target of controls
+    const __box = new THREE.Box3().setFromObject( mesh )
+    const center = __box.getCenter( new THREE.Vector3() )
+    controls.target.copy(center);
+    controls.update();
 
-    const targetPosition = new THREE.Vector3(
-      position.x,
-      position.y,
-      position.z
-    );
-
-    console.log("model", cameraRef.current.position)
-    console.log("model", cameraRef.current.rotation)
-
+    // Set the position
     gsap.to(camera.position, {
-      x: cameraRef.current.position.x,
-      y: cameraRef.current.position.y,
-      z: cameraRef.current.position.z,
-      duration: 1.5,
-      ease: "power3.inOut",
-      onUpdate: () => {
-        camera.updateMatrixWorld()
-      },
-      onComplete: () => {
-        camera.updateMatrixWorld()
-        console.log("cam", camera.position)
-
-        gsap.to(camera.rotation, {
-          x: cameraRef.current.rotation.x,
-          y: cameraRef.current.rotation.y,
-          z: cameraRef.current.rotation.z,
-          duration: 1.5,
-          ease: "power3.inOut",
-          onUpdate: () => {
-            camera.updateMatrixWorld()
-          },
-          onComplete: () => {
-            camera.updateMatrixWorld()
-            console.log("cam", camera.rotation)
-          },
-        });
-      },
-    });
+      x: cameraPos.x,
+      y: cameraPos.y,
+      z: cameraPos.z,
+      duration: 1,
+      ease: "power1.inOut"
+    })
   };
 
-  useHelper(cameraRef, THREE.CameraHelper)
+
 
   return (
     <>
-      <PerspectiveCamera makeDefault={false} ref={cameraRef} near={1} far={4} position={[0, 1, -2]} rotation={[0, 0, 0]}>
-        <meshBasicMaterial />
-      </PerspectiveCamera>
       <Suspense fallback={null}>
         {
-          picturesNames.map((picture, index) => (
-            <Image key={index} name={picture.name} onImageClick={handleImageClick} />
+          paintingsInfos.map((painting, index) => (
+            <Image key={index} painting={painting} onImageClick={handleImageClick} />
           ))
         }
       </Suspense>

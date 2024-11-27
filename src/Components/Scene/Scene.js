@@ -9,8 +9,8 @@ export default function Scene() {
     <>
       <Painting />
       <Museum />
-      <PerspectiveCamera makeDefault position={[0, 2, 8]}/>
       <Lights />
+      <PerspectiveCamera makeDefault position={[0, 2, 8]}/>
       <directionalLight position={[0, 0, 5]} color="red"/>
     </>
   )
