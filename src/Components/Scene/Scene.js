@@ -17,7 +17,7 @@ export default function Scene() {
         <directionalLight position={[0, 0, 5]} color="red"/>
         <PerspectiveCamera makeDefault position={[-8.00,
           2.75,
-          18.06]}/>
+          16.06]}/>
         <Environment preset={"city"} />
     </>
   )
