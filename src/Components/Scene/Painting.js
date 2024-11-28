@@ -19,15 +19,15 @@ const paintingsInfos = [
       '                    cannot follow it. . . . The more I continue, the more I see that a great deal of work is necessary in\n' +
       '                    order to succeed in rendering what I seek." Haystacks was the first group of paintings that Monet\n' +
       '                    exhibited as a series; in 1891, fifteen were shown at the Galerie Durand-Ruel in Paris.',
-    position: [-5.20, 2.37, 9.08],
-    rotation: [0, -2.76, 0],
+    position: [-8.39, 2.37, 6.59],
+    rotation: [0,0,0],
     cartel: {
-      positionCartel: [-4.58, 2.37, 8.84],
+      positionCartel: [-7.74  , 2.37, 6.59],
     },
     cameraPos: {
-      x: 0,
-      y: 1,
-      z: -3
+      x: -8.39,
+      y: 2.37,
+      z: 7.59
     }
   }
 ]
@@ -43,12 +43,6 @@ function Cartel({ painting }) {
     setOpen(false);
   }
 
-  const { rotationX, rotationY, rotationZ } = useControls(`Rotation - cartel`, {
-    rotationX: { value: painting.rotation[0] || 0, min: -Math.PI, max: Math.PI, step: 0.01 },
-    rotationY: { value: painting.rotation[1] || 0, min: -Math.PI, max: Math.PI, step: 0.01 },
-    rotationZ: { value: painting.rotation[2] || 0, min: -Math.PI, max: Math.PI, step: 0.01 },
-  });
-
   const { positionX, positionY, positionZ } = useControls(`Position - cartel`, {
     positionX: { value: painting.cartel.positionCartel[0] || 0, min: -20, max: 20, step: 0.01 },
     positionY: { value: painting.cartel.positionCartel[1] || 0, min: -20, max: 20, step: 0.01 },
@@ -59,7 +53,6 @@ function Cartel({ painting }) {
     <>
       <mesh
         position={[positionX, positionY, positionZ]}
-        rotation={[rotationX, rotationY, rotationZ]}
         onClick={(e) => openModal()}
       >
         <planeGeometry args={[1 / 5, 1 / 5]}/>
@@ -100,12 +93,6 @@ function Cartel({ painting }) {
 function Image({ painting, onImageClick }) {
   const texture = useLoader(THREE.TextureLoader, '/pictures_monet/' + painting.name);
 
-  const { rotationX, rotationY, rotationZ } = useControls(`Rotation - tableau`, {
-    rotationX: { value: painting.rotation[0] || 0, min: -Math.PI, max: Math.PI, step: 0.01 },
-    rotationY: { value: painting.rotation[1] || 0, min: -Math.PI, max: Math.PI, step: 0.01 },
-    rotationZ: { value: painting.rotation[2] || 0, min: -Math.PI, max: Math.PI, step: 0.01 },
-  });
-
   const { positionX, positionY, positionZ } = useControls(`Position - tableau`, {
     positionX: { value: painting.position[0] || 0, min: -20, max: 20, step: 0.01 },
     positionY: { value: painting.position[1] || 0, min: -20, max: 20, step: 0.01 },
@@ -115,7 +102,6 @@ function Image({ painting, onImageClick }) {
   return (
     <mesh
       position={[positionX, positionY, positionZ]}
-      rotation={[rotationX, rotationY, rotationZ]}
       onClick={(e) => onImageClick(e.object, painting.cameraPos)}
     >
       <planeGeometry attach="geometry" args={[1, 3 / 5]} />
@@ -126,7 +112,8 @@ function Image({ painting, onImageClick }) {
 
 export default function Painting() {
   const {camera, controls} = useThree();
-  const cameraRef = useRef();
+  const cameraCopy = useRef();
+
 
   const handleImageClick = (mesh, cameraPos) => {
     // Set the correct target of controls
@@ -145,9 +132,21 @@ export default function Painting() {
     })
   };
 
+  useHelper(cameraCopy, THREE.CameraHelper)
+
+  const { positionX, positionY, positionZ } = useControls(`Position - Camera`, {
+    positionX: { value: paintingsInfos[0].cameraPos.x || 0, min: -20, max: 20, step: 0.01 },
+    positionY: { value: paintingsInfos[0].cameraPos.y || 0, min: -20, max: 20, step: 0.01 },
+    positionZ: { value: paintingsInfos[0].cameraPos.z || 0, min: -20, max: 20, step: 0.01 },
+  });
 
   return (
     <>
+      <PerspectiveCamera ref={cameraCopy} far={4} position={[
+        positionX,
+        positionY,
+        positionZ
+      ]} />
       <Suspense fallback={null}>
         {
           paintingsInfos.map((painting, index) => (
