@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
-import {Suspense, useRef, useState} from "react";
+import {Suspense, useEffect, useRef, useState} from "react";
 import gsap from "gsap";
 import {Html, PerspectiveCamera, useHelper} from "@react-three/drei";
 import styles from "@/app/page.module.scss";
@@ -59,7 +59,7 @@ function Cartel({ painting }) {
         <meshBasicMaterial color={"limegreen"} side={THREE.DoubleSide}/>
       </mesh>
       {
-        open && <Html fullscreen={true} position={[0, 1, -3.98]}>
+        open && <Html fullscreen={true} position={painting.position}>
           <div
             className={"background"}
             onClick={() => closeModal()}
@@ -114,25 +114,56 @@ export default function Painting() {
   const {camera, controls} = useThree();
   const cameraCopy = useRef();
 
+  const [isFocus, setIsFocus] = useState(false)
+  const [_positionCam, setPosition] = useState(new THREE.Vector3())
+
 
   const handleImageClick = (mesh, cameraPos) => {
-    // Set the correct target of controls
-    const __box = new THREE.Box3().setFromObject(mesh)
-    const center = __box.getCenter(new THREE.Vector3())
-    controls.target.copy(center);
-    controls.update();
+    // Sauvegarder la position initiale de la caméra au premier clic
+    if (!_positionCam.length()) {
+      setPosition(camera.position.clone()); // Clone la position initiale
+    }
 
-    // Set the position
-    gsap.to(camera.position, {
-      x: cameraPos.x,
-      y: cameraPos.y,
-      z: cameraPos.z,
-      duration: 1,
-      ease: "power1.inOut"
-    })
+    if (!isFocus) {
+      // Zoom sur le tableau
+      gsap.to(camera.position, {
+        x: cameraPos.x,
+        y: cameraPos.y,
+        z: cameraPos.z,
+        duration: 1,
+        ease: "power1.inOut",
+        onStart: () => {
+          // Centrer temporairement les contrôles sur le tableau
+          const boundingBox = new THREE.Box3().setFromObject(mesh);
+          const center = boundingBox.getCenter(new THREE.Vector3());
+          controls.target.copy(center);
+          controls.update();
+        },
+        onComplete: () => {
+          // Permettre la navigation après le zoom
+          setIsFocus(true); // La caméra est maintenant en focus sur le tableau
+        }
+      });
+    } else {
+      // Retour à la position initiale
+      gsap.to(camera.position, {
+        x: _positionCam.x,
+        y: _positionCam.y,
+        z: _positionCam.z,
+        duration: 1,
+        ease: "power1.inOut",
+        onStart: () => {
+          controls.target.set(0, 0, 0);
+          controls.update();
+        },
+        onComplete: () => {
+          setIsFocus(false);
+        }
+      });
+    }
   };
 
-  useHelper(cameraCopy, THREE.CameraHelper)
+  // useHelper(cameraCopy, THREE.CameraHelper)
 
   const { positionX, positionY, positionZ } = useControls(`Position - Camera`, {
     positionX: { value: paintingsInfos[0].cameraPos.x || 0, min: -20, max: 20, step: 0.01 },
