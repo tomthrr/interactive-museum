@@ -4,6 +4,7 @@ import {Suspense, useRef, useState} from "react";
 import gsap from "gsap";
 import {Html, PerspectiveCamera, useHelper} from "@react-three/drei";
 import styles from "@/app/page.module.scss";
+import {useControls} from "leva";
 
 const paintingsInfos = [
   {
@@ -18,9 +19,10 @@ const paintingsInfos = [
       '                    cannot follow it. . . . The more I continue, the more I see that a great deal of work is necessary in\n' +
       '                    order to succeed in rendering what I seek." Haystacks was the first group of paintings that Monet\n' +
       '                    exhibited as a series; in 1891, fifteen were shown at the Galerie Durand-Ruel in Paris.',
-    position: [0, 1, -3.98],
+    position: [-3.33, 1.3, 5.71],
+    rotation: [0, -2.76, 0],
     cartel: {
-      positionCartel: [0.65, .8, -3.98],
+      positionCartel: [-3.68, 0.85, 5.91],
     },
     cameraPos: {
       x: 0,
@@ -41,14 +43,27 @@ function Cartel({ painting }) {
     setOpen(false);
   }
 
+  const { rotationX, rotationY, rotationZ } = useControls(`Rotation - cartel`, {
+    rotationX: { value: painting.rotation[0] || 0, min: -Math.PI, max: Math.PI, step: 0.01 },
+    rotationY: { value: painting.rotation[1] || 0, min: -Math.PI, max: Math.PI, step: 0.01 },
+    rotationZ: { value: painting.rotation[2] || 0, min: -Math.PI, max: Math.PI, step: 0.01 },
+  });
+
+  const { positionX, positionY, positionZ } = useControls(`Position - cartel`, {
+    positionX: { value: painting.cartel.positionCartel[0] || 0, min: -10, max: 10, step: 0.1 },
+    positionY: { value: painting.cartel.positionCartel[1] || 0, min: -10, max: 10, step: 0.1 },
+    positionZ: { value: painting.cartel.positionCartel[2] || 0, min: -10, max: 10, step: 0.1 },
+  });
+
   return (
     <>
       <mesh
-        position={painting.cartel.positionCartel}
+        position={[positionX, positionY, positionZ]}
+        rotation={[rotationX, rotationY, rotationZ]}
         onClick={(e) => openModal()}
       >
         <planeGeometry args={[1 / 5, 1 / 5]}/>
-        <meshBasicMaterial color={"limegreen"}/>
+        <meshBasicMaterial color={"limegreen"} side={THREE.DoubleSide}/>
       </mesh>
       {
         open && <Html fullscreen={true} position={[0, 1, -3.98]}>
@@ -82,16 +97,29 @@ function Cartel({ painting }) {
   )
 }
 
-function Image({painting, onImageClick}) {
+function Image({ painting, onImageClick }) {
   const texture = useLoader(THREE.TextureLoader, '/pictures_monet/' + painting.name);
+
+  const { rotationX, rotationY, rotationZ } = useControls(`Rotation - tableau`, {
+    rotationX: { value: painting.rotation[0] || 0, min: -Math.PI, max: Math.PI, step: 0.01 },
+    rotationY: { value: painting.rotation[1] || 0, min: -Math.PI, max: Math.PI, step: 0.01 },
+    rotationZ: { value: painting.rotation[2] || 0, min: -Math.PI, max: Math.PI, step: 0.01 },
+  });
+
+  const { positionX, positionY, positionZ } = useControls(`Position - tableau`, {
+    positionX: { value: painting.position[0] || 0, min: -10, max: 10, step: 0.1 },
+    positionY: { value: painting.position[1] || 0, min: -10, max: 10, step: 0.1 },
+    positionZ: { value: painting.position[2] || 0, min: -10, max: 10, step: 0.1 },
+  });
 
   return (
     <mesh
-      position={painting.position} // Position du tableau
-      onClick={(e) => onImageClick(e.object, painting.cameraPos)} // Passe l'objet cliqué
+      position={[positionX, positionY, positionZ]}
+      rotation={[rotationX, rotationY, rotationZ]}
+      onClick={(e) => onImageClick(e.object, painting.cameraPos)}
     >
-      <planeGeometry attach="geometry" args={[1, 3 / 5]}/>
-      <meshBasicMaterial attach="material" map={texture} toneMapped={false}/>
+      <planeGeometry attach="geometry" args={[1, 3 / 5]} />
+      <meshBasicMaterial attach="material" map={texture} toneMapped={false} side={THREE.DoubleSide} />
     </mesh>
   );
 }
@@ -123,10 +151,10 @@ export default function Painting() {
       <Suspense fallback={null}>
         {
           paintingsInfos.map((painting, index) => (
-            <>
-              <Image key={index} painting={painting} onImageClick={handleImageClick}/>
-              <Cartel key={index} painting={painting}/>
-            </>
+            <group key={index}>
+              <Image painting={painting} onImageClick={handleImageClick}/>
+              <Cartel painting={painting}/>
+            </group>
           ))
         }
       </Suspense>
