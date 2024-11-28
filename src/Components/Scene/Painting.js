@@ -19,10 +19,10 @@ const paintingsInfos = [
       '                    cannot follow it. . . . The more I continue, the more I see that a great deal of work is necessary in\n' +
       '                    order to succeed in rendering what I seek." Haystacks was the first group of paintings that Monet\n' +
       '                    exhibited as a series; in 1891, fifteen were shown at the Galerie Durand-Ruel in Paris.',
-    position: [-3.33, 1.3, 5.71],
+    position: [-5.20, 2.37, 9.08],
     rotation: [0, -2.76, 0],
     cartel: {
-      positionCartel: [-3.68, 0.85, 5.91],
+      positionCartel: [-4.58, 2.37, 8.84],
     },
     cameraPos: {
       x: 0,
@@ -50,9 +50,9 @@ function Cartel({ painting }) {
   });
 
   const { positionX, positionY, positionZ } = useControls(`Position - cartel`, {
-    positionX: { value: painting.cartel.positionCartel[0] || 0, min: -10, max: 10, step: 0.1 },
-    positionY: { value: painting.cartel.positionCartel[1] || 0, min: -10, max: 10, step: 0.1 },
-    positionZ: { value: painting.cartel.positionCartel[2] || 0, min: -10, max: 10, step: 0.1 },
+    positionX: { value: painting.cartel.positionCartel[0] || 0, min: -20, max: 20, step: 0.01 },
+    positionY: { value: painting.cartel.positionCartel[1] || 0, min: -20, max: 20, step: 0.01 },
+    positionZ: { value: painting.cartel.positionCartel[2] || 0, min: -20, max: 20, step: 0.01 },
   });
 
   return (
@@ -107,9 +107,9 @@ function Image({ painting, onImageClick }) {
   });
 
   const { positionX, positionY, positionZ } = useControls(`Position - tableau`, {
-    positionX: { value: painting.position[0] || 0, min: -10, max: 10, step: 0.1 },
-    positionY: { value: painting.position[1] || 0, min: -10, max: 10, step: 0.1 },
-    positionZ: { value: painting.position[2] || 0, min: -10, max: 10, step: 0.1 },
+    positionX: { value: painting.position[0] || 0, min: -20, max: 20, step: 0.01 },
+    positionY: { value: painting.position[1] || 0, min: -20, max: 20, step: 0.01 },
+    positionZ: { value: painting.position[2] || 0, min: -20, max: 20, step: 0.01 },
   });
 
   return (
