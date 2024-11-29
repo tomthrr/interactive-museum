@@ -11,6 +11,10 @@ const paintingsInfos = [
     name: 'haystack-snow-effect.jpg',
     title: 'Haystacks',
     made: '1891',
+    artist: 'Claude Monet',
+    artistInfos: 'French, Paris 1840–1926 Giverny',
+    medium: 'Oil on canvas',
+    dimensions: '25 3/4 x 36 1/4 in. (65.4 x 92.1 cm)',
     description: 'Between 1890 and 1891 Monet devoted some thirty paintings to the haystacks in a field near his house\n' +
       '                    at\n' +
       '                    Giverny. In the midst of this effort, he wrote to the critic Gustave Geoffroy: "I am working very\n' +
@@ -22,7 +26,8 @@ const paintingsInfos = [
     position: [-8.39, 2.37, 6.59],
     rotation: [0,0,0],
     cartel: {
-      positionCartel: [-7.74  , 2.37, 6.59],
+      cartelPath: 'haystack-snow-effect-cartel.jpg',
+      positionCartel: [-7.74  , 2.17, 6.59],
     },
     cameraPos: {
       x: -8.39,
@@ -33,7 +38,8 @@ const paintingsInfos = [
 ]
 
 function Cartel({ painting }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
+  const texture = useLoader(THREE.TextureLoader, '/pictures_monet/' + painting.cartel.cartelPath);
 
   const openModal = () => {
     setOpen(true);
@@ -55,8 +61,8 @@ function Cartel({ painting }) {
         position={[positionX, positionY, positionZ]}
         onClick={(e) => openModal()}
       >
-        <planeGeometry args={[1 / 5, 1 / 5]}/>
-        <meshBasicMaterial color={"limegreen"} side={THREE.DoubleSide}/>
+        <planeGeometry attach="geometry" args={[1 / 5, 1 / 5]}/>
+        <meshBasicMaterial attach="material" map={texture} toneMapped={false} side={THREE.DoubleSide}/>
       </mesh>
       {
         open && <Html fullscreen={true} position={painting.position}>
@@ -66,21 +72,25 @@ function Cartel({ painting }) {
           >
             <div className={"modal"} onClick={(e) => e.stopPropagation()}>
               <div className={"header"}>
+                <h2>{painting.artist}</h2>
+                <h3>{painting.artistInfos}</h3>
+              </div>
+              <div className={"subheader"}>
                 <h2>{painting.title}</h2>
+                <h3>{painting.medium}, {painting.made}</h3>
+                <p>{painting.dimensions}</p>
               </div>
               <div className={"content"}>
                 <div className={"description"}>
                   <p>{painting.description}</p>
-                </div>
-                <div className={"infos"}>
-                  <p>Made in {painting.made}.</p>
                 </div>
               </div>
               <div className={"footer"}>
                 <button
                   onClick={() => closeModal()}
                   className={"button"}
-                >Close</button>
+                >Close
+                </button>
               </div>
             </div>
           </div>
@@ -90,7 +100,7 @@ function Cartel({ painting }) {
   )
 }
 
-function Image({ painting, onImageClick }) {
+function Image({painting, onImageClick}) {
   const texture = useLoader(THREE.TextureLoader, '/pictures_monet/' + painting.name);
 
   const { positionX, positionY, positionZ } = useControls(`Position - tableau`, {

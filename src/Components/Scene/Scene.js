@@ -18,7 +18,11 @@ export default function Scene() {
         <PerspectiveCamera makeDefault position={[-8.00,
           2.75,
           16.06]}/>
-        <Environment preset={"city"} />
+        <Environment
+          background={false}
+          preset={"city"}
+          backgroundBlurriness={0.02}
+        />
     </>
   )
 }

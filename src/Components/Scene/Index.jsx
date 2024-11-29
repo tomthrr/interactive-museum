@@ -8,7 +8,7 @@ export default function Index() {
 
   return (
     <Canvas shadows dpr={[1, 2]} camera={{ fov: 80 }}>
-      <FirstPersonControls makeDefault />
+      <OrbitControls makeDefault />
       <Scene />
     </Canvas>
   )
