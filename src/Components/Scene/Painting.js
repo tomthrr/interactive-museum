@@ -5,40 +5,10 @@ import gsap from "gsap";
 import {Html, PerspectiveCamera, useHelper} from "@react-three/drei";
 import styles from "@/app/page.module.scss";
 import {useControls} from "leva";
-
-const paintingsInfos = [
-  {
-    name: 'haystack-snow-effect.jpg',
-    title: 'Haystacks',
-    made: '1891',
-    artist: 'Claude Monet',
-    artistInfos: 'French, Paris 1840–1926 Giverny',
-    medium: 'Oil on canvas',
-    dimensions: '25 3/4 x 36 1/4 in. (65.4 x 92.1 cm)',
-    description: 'Between 1890 and 1891 Monet devoted some thirty paintings to the haystacks in a field near his house\n' +
-      '                    at\n' +
-      '                    Giverny. In the midst of this effort, he wrote to the critic Gustave Geoffroy: "I am working very\n' +
-      '                    hard,\n' +
-      '                    struggling with a series of different effects (haystacks), but at this season the sun sets so fast I\n' +
-      '                    cannot follow it. . . . The more I continue, the more I see that a great deal of work is necessary in\n' +
-      '                    order to succeed in rendering what I seek." Haystacks was the first group of paintings that Monet\n' +
-      '                    exhibited as a series; in 1891, fifteen were shown at the Galerie Durand-Ruel in Paris.',
-    position: [-8.39, 2.37, 6.59],
-    rotation: [0,0,0],
-    cartel: {
-      cartelPath: 'haystack-snow-effect-cartel.jpg',
-      positionCartel: [-7.74  , 2.17, 6.59],
-    },
-    cameraPos: {
-      x: -8.39,
-      y: 2.37,
-      z: 7.59
-    }
-  }
-]
+import {paintingsInfos} from "@/data/paintings-infos";
 
 function Cartel({ painting }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const texture = useLoader(THREE.TextureLoader, '/pictures_monet/' + painting.cartel.cartelPath);
 
   const openModal = () => {
@@ -49,16 +19,11 @@ function Cartel({ painting }) {
     setOpen(false);
   }
 
-  const { positionX, positionY, positionZ } = useControls(`Position - cartel`, {
-    positionX: { value: painting.cartel.positionCartel[0] || 0, min: -20, max: 20, step: 0.01 },
-    positionY: { value: painting.cartel.positionCartel[1] || 0, min: -20, max: 20, step: 0.01 },
-    positionZ: { value: painting.cartel.positionCartel[2] || 0, min: -20, max: 20, step: 0.01 },
-  });
-
   return (
     <>
       <mesh
-        position={[positionX, positionY, positionZ]}
+        position={[painting.cartel.positionCartel[0], painting.cartel.positionCartel[1], painting.cartel.positionCartel[2]]}
+        rotation={[painting.cartel.rotationCartel[0], painting.cartel.rotationCartel[1], painting.cartel.rotationCartel[2]]}
         onClick={(e) => openModal()}
       >
         <planeGeometry attach="geometry" args={[1 / 5, 1 / 5]}/>
@@ -103,15 +68,10 @@ function Cartel({ painting }) {
 function Image({painting, onImageClick}) {
   const texture = useLoader(THREE.TextureLoader, '/pictures_monet/' + painting.name);
 
-  const { positionX, positionY, positionZ } = useControls(`Position - tableau`, {
-    positionX: { value: painting.position[0] || 0, min: -20, max: 20, step: 0.01 },
-    positionY: { value: painting.position[1] || 0, min: -20, max: 20, step: 0.01 },
-    positionZ: { value: painting.position[2] || 0, min: -20, max: 20, step: 0.01 },
-  });
-
   return (
     <mesh
-      position={[positionX, positionY, positionZ]}
+      position={[painting.position[0], painting.position[1], painting.position[2]]}
+      rotation={[painting.rotation[0], painting.rotation[1], painting.rotation[2]]}
       onClick={(e) => onImageClick(e.object, painting.cameraPos)}
     >
       <planeGeometry attach="geometry" args={[1, 3 / 5]} />
@@ -183,11 +143,7 @@ export default function Painting() {
 
   return (
     <>
-      <PerspectiveCamera ref={cameraCopy} far={4} position={[
-        positionX,
-        positionY,
-        positionZ
-      ]} />
+      {/*<PerspectiveCamera ref={cameraCopy} position={[7.3, 2.37, -8]}/>*/}
       <Suspense fallback={null}>
         {
           paintingsInfos.map((painting, index) => (

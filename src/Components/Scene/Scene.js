@@ -23,6 +23,7 @@ export default function Scene() {
           preset={"city"}
           backgroundBlurriness={0.02}
         />
+      <axesHelper position={[0, 1, 0]} args={[5]} />
     </>
   )
 }
