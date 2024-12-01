@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import {Suspense, useEffect, useRef, useState} from "react";
 import gsap from "gsap";
-import {Html, PerspectiveCamera, useHelper} from "@react-three/drei";
+import {Html, PerspectiveCamera, Scroll, useHelper} from "@react-three/drei";
 import styles from "@/app/page.module.scss";
 import {useControls} from "leva";
 import {paintingsInfos} from "@/data/paintings-infos";
@@ -17,6 +17,8 @@ function Cartel({ painting }) {
 
   const closeModal = () => {
     setOpen(false);
+    const container = document.querySelector('.modal-container');
+    if (container) container.style.display = 'none';
   }
 
   return (
@@ -30,7 +32,7 @@ function Cartel({ painting }) {
         <meshBasicMaterial attach="material" map={texture} toneMapped={false} side={THREE.DoubleSide}/>
       </mesh>
       {
-        open && <Html fullscreen={true} position={painting.position}>
+        open && <Scroll html position={painting.position} className={"modal-container"}>
           <div
             className={"background"}
             onClick={() => closeModal()}
@@ -59,7 +61,7 @@ function Cartel({ painting }) {
               </div>
             </div>
           </div>
-        </Html>
+        </Scroll>
       }
     </>
   )
