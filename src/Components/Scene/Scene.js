@@ -16,8 +16,8 @@ export default function Scene() {
   return (
     <>
       <Suspense fallback={null}>
-          <ScrollControls pages={2} damping={0.2}>
-            <Painting />
+          <Painting />
+          <ScrollControls pages={10} damping={0.2}>
             <Museum controlsRef={controlsRef}/>
           </ScrollControls>
       </Suspense>

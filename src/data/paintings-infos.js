@@ -36,6 +36,32 @@ export const paintingsInfos = [
     }
   },
   {
+    name: 'spring.jpg',
+    title: 'Spring (Fruit Trees in Bloom)',
+    made: '1873',
+    artist: 'Claude Monet',
+    artistInfos: 'French, Paris 1840–1926 Giverny',
+    medium: 'Oil on canvas',
+    dimensions: '24 1/2 x 39 5/8 in. (62.2 x 100.6 cm)',
+    description: 'Monet made this work in the vicinity of his home in Argenteuil, a village on the Seine northwest of Paris ' +
+      'that was a favorite gathering place of the Impressionists. Although the scene has previously been called Plum Blossoms ' +
+      'and Apples Trees in Bloom, the type of tree cannot be determined from the flurry of white buds evoked by the artist. ' +
+      'The pastel shades of spring and the clear light inspired him to represent nature almost purely in terms of color. ' +
+      'This was the first painting by Monet to enter the Museum’s collection, via bequest in 1926.',
+    position: [0.3, 2.37, 9.874],
+    rotation: [0, THREE.MathUtils.degToRad(-28.9), 0],
+    cartel: {
+      cartelPath: 'spring-cartel.jpg',
+      positionCartel: [0.84, 2.17, 10.22],
+      rotationCartel: [0, THREE.MathUtils.degToRad(-28.9), 0],
+    },
+    cameraPos: {
+      x: -0.3,
+      y: 2.37,
+      z: 10.874
+    }
+  },
+  {
     name: 'poppy-fields-argenteuil.jpg',
     title: 'Poppy Fields near Argenteuil',
     made: '1875',
@@ -58,6 +84,32 @@ export const paintingsInfos = [
       x: -6.59,
       y: 2.37,
       z: 2.96
+    }
+  },
+  {
+    name: 'bodmer.jpg',
+    title: 'The Bodmer Oak, Fontainebleau Forest',
+    made: '1865',
+    artist: 'Claude Monet',
+    artistInfos: 'French, Paris 1840–1926 Giverny',
+    medium: 'Oil on canvas',
+    dimensions: '37 7/8 x 50 7/8 in. (96.2 x 129.2 cm)',
+    description: 'The Forest of Fontainebleau, south of Paris, became an artistic hot spot in the 1830s. One popular motif was the Bodmer Oak,' +
+      ' named after Swiss artist Karl Bodmer (1809–1893), who exhibited a painting of the tree at the Salon of 1850. Monet used bright yellows,' +
+      ' greens, and oranges to depict sunlight filtering through the canopy of branches. The carpet of russet leaves signals that he painted this' +
+      ' view just before he concluded a months-long visit to Fontainebleau in October 1865. It is probably the last of several landscapes related ' +
+      'to his monumental Luncheon on the Grass (1865–66; Musée d’Orsay, Paris), which is set in a sunny woodland glade.',
+    position: [2.12, 2.37, 5.265],
+    rotation: [0, THREE.MathUtils.degToRad(-28.9), 0],
+    cartel: {
+      cartelPath: 'bodmer-cartel.jpg',
+      positionCartel: [2.7, 2.17, 5.58],
+      rotationCartel: [0, THREE.MathUtils.degToRad(-28.9), 0],
+    },
+    cameraPos: {
+      x: 1.65,
+      y: 2.37,
+      z: 6.12,
     }
   },
   {
@@ -85,110 +137,6 @@ export const paintingsInfos = [
       x: -4.79,
       y: 2.37,
       z: -1.67
-    }
-  },
-  {
-    name: 'garden-saint-adresse.jpg',
-    title: 'Garden at Sainte-Adresse',
-    made: '1867',
-    artist: 'Claude Monet',
-    artistInfos: 'French, Paris 1840–1926 Giverny',
-    medium: 'Oil on canvas',
-    dimensions: '38 5/8 x 51 1/8 in. (98.1 x 129.9 cm)',
-    description: 'Monet spent the summer of 1867 with his family at Sainte-Adresse, a seaside resort near Le Havre. ' +
-      'It was there that he painted this buoyant, sunlit scene of contemporary leisure, enlisting his father (shown ' +
-      'seated in a panama hat) and other relatives as models. By adopting an elevated viewpoint and painting the terrace, ' +
-      'sea, and sky as three distinct bands of high-keyed color, Monet emphasized the flat surface of the canvas. ' +
-      'His approach—daring for its time—reflects his admiration for Japanese prints. Twelve years after it was made, ' +
-      'Monet exhibited the picture at the fourth Impressionist exhibition of 1879 as Jardin à Sainte-Adresse.',
-    position: [-2.99, 2.37, -7.3],
-    rotation: [0,0,0],
-    cartel: {
-      cartelPath: 'garden-saint-adresse-cartel.jpg',
-      positionCartel: [-2.34, 2.17, -7.3],
-      rotationCartel: [0, 0, 0],
-    },
-    cameraPos: {
-      x: -2.99,
-      y: 2.37,
-      z: -6.3
-    }
-  },
-  {
-    name: 'la-grenouillere.jpg',
-    title: 'La Grenouillère',
-    made: '1869',
-    artist: 'Claude Monet',
-    artistInfos: 'French, Paris 1840–1926 Giverny',
-    medium: 'Oil on canvas',
-    dimensions: '29 3/8 x 39 1/4 in. (74.6 x 99.7 cm)',
-    description: 'During the summer of 1869, Monet and Renoir set up their easels at La Grenouillère, a boating and bathing resort' +
-      ' on the Seine River, not far from Paris. Monet noted on September 25, "I do have a dream, a painting, the baths of La Grenouillère,' +
-      ' for which I have made some bad sketches, but it is only a dream. Renoir, who has just spent two months here, also wants to do this painting."' +
-      ' Among their various depictions of the subject, this composition closely resembles one by Renoir in the Nationalmuseum, Stockholm.',
-    position: [-1.19, 2.37, -11.93],
-    rotation: [0,0,0],
-    cartel: {
-      cartelPath: 'la-grenouillere-cartel.jpg',
-      positionCartel: [-0.54, 2.17, -11.93],
-      rotationCartel: [0, 0, 0],
-    },
-    cameraPos: {
-      x: -1.19,
-      y: 2.37,
-      z: -10.93
-    }
-  },
-  {
-    name: 'spring.jpg',
-    title: 'Spring (Fruit Trees in Bloom)',
-    made: '1873',
-    artist: 'Claude Monet',
-    artistInfos: 'French, Paris 1840–1926 Giverny',
-    medium: 'Oil on canvas',
-    dimensions: '24 1/2 x 39 5/8 in. (62.2 x 100.6 cm)',
-    description: 'Monet made this work in the vicinity of his home in Argenteuil, a village on the Seine northwest of Paris ' +
-      'that was a favorite gathering place of the Impressionists. Although the scene has previously been called Plum Blossoms ' +
-      'and Apples Trees in Bloom, the type of tree cannot be determined from the flurry of white buds evoked by the artist. ' +
-      'The pastel shades of spring and the clear light inspired him to represent nature almost purely in terms of color. ' +
-      'This was the first painting by Monet to enter the Museum’s collection, via bequest in 1926.',
-    position: [0.3, 2.37, 9.874],
-    rotation: [0, THREE.MathUtils.degToRad(-28.9), 0],
-    cartel: {
-      cartelPath: 'spring-cartel.jpg',
-      positionCartel: [0.84, 2.17, 10.22],
-      rotationCartel: [0, THREE.MathUtils.degToRad(-28.9), 0],
-    },
-    cameraPos: {
-      x: -0.3,
-      y: 2.37,
-      z: 10.874
-    }
-  },
-  {
-    name: 'bodmer.jpg',
-    title: 'The Bodmer Oak, Fontainebleau Forest',
-    made: '1865',
-    artist: 'Claude Monet',
-    artistInfos: 'French, Paris 1840–1926 Giverny',
-    medium: 'Oil on canvas',
-    dimensions: '37 7/8 x 50 7/8 in. (96.2 x 129.2 cm)',
-    description: 'The Forest of Fontainebleau, south of Paris, became an artistic hot spot in the 1830s. One popular motif was the Bodmer Oak,' +
-      ' named after Swiss artist Karl Bodmer (1809–1893), who exhibited a painting of the tree at the Salon of 1850. Monet used bright yellows,' +
-      ' greens, and oranges to depict sunlight filtering through the canopy of branches. The carpet of russet leaves signals that he painted this' +
-      ' view just before he concluded a months-long visit to Fontainebleau in October 1865. It is probably the last of several landscapes related ' +
-      'to his monumental Luncheon on the Grass (1865–66; Musée d’Orsay, Paris), which is set in a sunny woodland glade.',
-    position: [2.12, 2.37, 5.265],
-    rotation: [0, THREE.MathUtils.degToRad(-28.9), 0],
-    cartel: {
-      cartelPath: 'bodmer-cartel.jpg',
-      positionCartel: [2.7, 2.17, 5.58],
-      rotationCartel: [0, THREE.MathUtils.degToRad(-28.9), 0],
-    },
-    cameraPos: {
-      x: 1.65,
-      y: 2.37,
-      z: 6.12,
     }
   },
   {
@@ -241,6 +189,58 @@ export const paintingsInfos = [
       x: 5.28,
       y: 2.37,
       z: -3.052
+    }
+  },
+  {
+    name: 'garden-saint-adresse.jpg',
+    title: 'Garden at Sainte-Adresse',
+    made: '1867',
+    artist: 'Claude Monet',
+    artistInfos: 'French, Paris 1840–1926 Giverny',
+    medium: 'Oil on canvas',
+    dimensions: '38 5/8 x 51 1/8 in. (98.1 x 129.9 cm)',
+    description: 'Monet spent the summer of 1867 with his family at Sainte-Adresse, a seaside resort near Le Havre. ' +
+      'It was there that he painted this buoyant, sunlit scene of contemporary leisure, enlisting his father (shown ' +
+      'seated in a panama hat) and other relatives as models. By adopting an elevated viewpoint and painting the terrace, ' +
+      'sea, and sky as three distinct bands of high-keyed color, Monet emphasized the flat surface of the canvas. ' +
+      'His approach—daring for its time—reflects his admiration for Japanese prints. Twelve years after it was made, ' +
+      'Monet exhibited the picture at the fourth Impressionist exhibition of 1879 as Jardin à Sainte-Adresse.',
+    position: [-2.99, 2.37, -7.3],
+    rotation: [0,0,0],
+    cartel: {
+      cartelPath: 'garden-saint-adresse-cartel.jpg',
+      positionCartel: [-2.34, 2.17, -7.3],
+      rotationCartel: [0, 0, 0],
+    },
+    cameraPos: {
+      x: -2.99,
+      y: 2.37,
+      z: -6.3
+    }
+  },
+  {
+    name: 'la-grenouillere.jpg',
+    title: 'La Grenouillère',
+    made: '1869',
+    artist: 'Claude Monet',
+    artistInfos: 'French, Paris 1840–1926 Giverny',
+    medium: 'Oil on canvas',
+    dimensions: '29 3/8 x 39 1/4 in. (74.6 x 99.7 cm)',
+    description: 'During the summer of 1869, Monet and Renoir set up their easels at La Grenouillère, a boating and bathing resort' +
+      ' on the Seine River, not far from Paris. Monet noted on September 25, "I do have a dream, a painting, the baths of La Grenouillère,' +
+      ' for which I have made some bad sketches, but it is only a dream. Renoir, who has just spent two months here, also wants to do this painting."' +
+      ' Among their various depictions of the subject, this composition closely resembles one by Renoir in the Nationalmuseum, Stockholm.',
+    position: [-1.19, 2.37, -11.93],
+    rotation: [0,0,0],
+    cartel: {
+      cartelPath: 'la-grenouillere-cartel.jpg',
+      positionCartel: [-0.54, 2.17, -11.93],
+      rotationCartel: [0, 0, 0],
+    },
+    cameraPos: {
+      x: -1.19,
+      y: 2.37,
+      z: -10.93
     }
   },
   {

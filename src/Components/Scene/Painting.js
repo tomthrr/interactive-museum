@@ -137,12 +137,6 @@ export default function Painting() {
 
   // useHelper(cameraCopy, THREE.CameraHelper)
 
-  const { positionX, positionY, positionZ } = useControls(`Position - Camera`, {
-    positionX: { value: paintingsInfos[0].cameraPos.x || 0, min: -20, max: 20, step: 0.01 },
-    positionY: { value: paintingsInfos[0].cameraPos.y || 0, min: -20, max: 20, step: 0.01 },
-    positionZ: { value: paintingsInfos[0].cameraPos.z || 0, min: -20, max: 20, step: 0.01 },
-  });
-
   return (
     <>
       {/*<PerspectiveCamera ref={cameraCopy} position={[7.3, 2.37, -8]}/>*/}
