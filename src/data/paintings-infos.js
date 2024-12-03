@@ -166,32 +166,6 @@ export const paintingsInfos = [
     }
   },
   {
-    name: 'nervia.jpg',
-    title: 'The Valley of the Nervia',
-    made: '1884',
-    artist: 'Claude Monet',
-    artistInfos: 'French, Paris 1840–1926 Giverny',
-    medium: 'Oil on canvas',
-    dimensions: '26 x 32 in. (66 x 81.3 cm)',
-    description: 'Monet spent three months on the Italian Riviera in early 1884. He wrote a friend, "everything is superb and I want ' +
-      'to paint it all … there are many experiments to make. This landscape is a new experience for me." Installing himself in the ' +
-      'coastal town of Bordighera, Monet explored the scenic terrain. Here, he employed light, bright tones to depict the snowy Maritime' +
-      ' Alps along the border with France. Nestled among the hills is the village of Camporosso, on the banks of the Nervia, not far from ' +
-      'the river’s outlet in the Mediterranean Sea.',
-    position: [5.8, 2.37, -3.952],
-    rotation: [0, THREE.MathUtils.degToRad(-28.9), 0],
-    cartel: {
-      cartelPath: 'nervia-cartel.jpg',
-      positionCartel: [6.42, 2.17, -3.612],
-      rotationCartel: [0, THREE.MathUtils.degToRad(-28.9), 0],
-    },
-    cameraPos: {
-      x: 5.28,
-      y: 2.37,
-      z: -3.052
-    }
-  },
-  {
     name: 'garden-saint-adresse.jpg',
     title: 'Garden at Sainte-Adresse',
     made: '1867',
@@ -216,6 +190,32 @@ export const paintingsInfos = [
       x: -2.99,
       y: 2.37,
       z: -6.3
+    }
+  },
+  {
+    name: 'nervia.jpg',
+    title: 'The Valley of the Nervia',
+    made: '1884',
+    artist: 'Claude Monet',
+    artistInfos: 'French, Paris 1840–1926 Giverny',
+    medium: 'Oil on canvas',
+    dimensions: '26 x 32 in. (66 x 81.3 cm)',
+    description: 'Monet spent three months on the Italian Riviera in early 1884. He wrote a friend, "everything is superb and I want ' +
+      'to paint it all … there are many experiments to make. This landscape is a new experience for me." Installing himself in the ' +
+      'coastal town of Bordighera, Monet explored the scenic terrain. Here, he employed light, bright tones to depict the snowy Maritime' +
+      ' Alps along the border with France. Nestled among the hills is the village of Camporosso, on the banks of the Nervia, not far from ' +
+      'the river’s outlet in the Mediterranean Sea.',
+    position: [5.8, 2.37, -3.952],
+    rotation: [0, THREE.MathUtils.degToRad(-28.9), 0],
+    cartel: {
+      cartelPath: 'nervia-cartel.jpg',
+      positionCartel: [6.42, 2.17, -3.612],
+      rotationCartel: [0, THREE.MathUtils.degToRad(-28.9), 0],
+    },
+    cameraPos: {
+      x: 5.28,
+      y: 2.37,
+      z: -3.052
     }
   },
   {

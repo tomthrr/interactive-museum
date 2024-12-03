@@ -27,7 +27,8 @@ export default function Cartel({ painting }) {
         painting.title === "Haystacks (Effect of Snow and Sun)" &&
         <mesh
           position={[painting.cartel.positionCartel[0], painting.cartel.positionCartel[1], painting.cartel.positionCartel[2]]}
-          rotation={[painting.cartel.rotationCartel[0], painting.cartel.rotationCartel[1], painting.cartel.rotationCartel[2]]}>
+          rotation={[painting.cartel.rotationCartel[0], painting.cartel.rotationCartel[1], painting.cartel.rotationCartel[2]]}
+        >
           <boxGeometry args={[1, 1, 1]}/>
           <meshBasicMaterial color={"green"}/>
         </mesh>

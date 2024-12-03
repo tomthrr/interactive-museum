@@ -66,14 +66,22 @@ export function Museum({controlsRef}) {
     const center = boundingBox.getCenter(new THREE.Vector3());
     center.y += 0.62;
     center.x -= 0.15;
-    controlsRef.current.target.copy(center);
-    controlsRef.current.update();
+    gsap.to(controlsRef.current.target, {
+      x: center.x,
+      y: center.y,
+      z: center.z,
+      duration: 1,
+      ease: "power1.inOut",
+      onUpdate: () => {
+        controlsRef.current.update();
+      },
+    });
   };
 
   useFrame(() => {
     if (tl.current) {
-      const progress = scroll.offset * tl.current.duration();
-      tl.current.progress(Math.abs(progress));
+      const progress = (scroll.offset * tl.current.duration()) * (1 * 0.23); // Ajustement pour étendre l'animation
+      tl.current.progress(Math.min(progress, 1)); // S'assurer que la progression ne dépasse pas 1
       camera.position.lerp(cameraTarget.current, 0.1);
     }
   });
@@ -316,7 +324,7 @@ export function Museum({controlsRef}) {
           position={[-11.279, 2.196, -6.664]}
           scale={[0.123, 0.516, 1.118]}
         />
-        <Cartel painting={paintingsInfos[0]}/>
+
       </group>
 
       <group>
@@ -329,7 +337,7 @@ export function Museum({controlsRef}) {
           position={[-5.082, 2.196, -6.664]}
           scale={[0.123, 0.516, 1.118]}
         />
-        <Cartel painting={paintingsInfos[2]}/>
+
       </group>
 
       <group>
@@ -342,7 +350,7 @@ export function Museum({controlsRef}) {
           position={[1.115, 2.196, -6.664]}
           scale={[0.123, 0.516, 1.118]}
         />
-        <Cartel painting={paintingsInfos[4]}/>
+
       </group>
 
       <group>
@@ -355,7 +363,7 @@ export function Museum({controlsRef}) {
           position={[7.312, 2.196, -6.664]}
           scale={[0.123, 0.516, 1.118]}
         />
-        <Cartel painting={paintingsInfos[6]}/>
+
       </group>
 
       <group>
@@ -368,7 +376,7 @@ export function Museum({controlsRef}) {
           position={[13.509, 2.196, -6.664]}
           scale={[0.123, 0.516, 1.118]}
         />
-        <Cartel painting={paintingsInfos[8]}/>
+
       </group>
 
       <group>
@@ -382,7 +390,7 @@ export function Museum({controlsRef}) {
           rotation={[0, -0.454, 0]}
           scale={[0.117, 0.516, 1.217]}
         />
-        <Cartel painting={paintingsInfos[1]}/>
+
       </group>
 
       <group>
@@ -396,7 +404,7 @@ export function Museum({controlsRef}) {
           rotation={[0, -0.454, 0]}
           scale={[0.117, 0.516, 1.217]}
         />
-        <Cartel painting={paintingsInfos[3]}/>
+
       </group>
 
       <group>
@@ -410,7 +418,7 @@ export function Museum({controlsRef}) {
           rotation={[0, -0.454, 0]}
           scale={[0.117, 0.516, 1.217]}
         />
-        <Cartel painting={paintingsInfos[5]}/>
+
       </group>
 
       <group>
@@ -424,7 +432,7 @@ export function Museum({controlsRef}) {
           rotation={[0, -0.454, 0]}
           scale={[0.117, 0.516, 1.217]}
         />
-        <Cartel painting={paintingsInfos[7]}/>
+
       </group>
 
       <group>
@@ -438,7 +446,7 @@ export function Museum({controlsRef}) {
           rotation={[0, -0.454, 0]}
           scale={[0.117, 0.516, 1.217]}
         />
-        <Cartel painting={paintingsInfos[9]}/>
+
       </group>
       </group>
       )
