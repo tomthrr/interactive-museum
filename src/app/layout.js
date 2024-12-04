@@ -1,5 +1,5 @@
 import "./globals.scss";
-import SmoothScrolling from "@/Components/SmoothScrolling";
+import SmoothScrolling from "@/Components/SmoothScrolling/SmoothScrolling";
 
 export const metadata = {
   title: "Create Next App",
@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <SmoothScrolling>{children}</SmoothScrolling>
+        {children}
       </body>
     </html>
   );
