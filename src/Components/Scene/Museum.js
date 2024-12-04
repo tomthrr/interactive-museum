@@ -4,7 +4,6 @@ import gsap from "gsap";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import {paintingsInfos} from "@/data/paintings-infos";
-import Cartel from "@/Components/Scene/Cartel";
 import QuizModal from "@/Components/Modals/QuizModal/QuizModal";
 
 export const LENGTH = 10;

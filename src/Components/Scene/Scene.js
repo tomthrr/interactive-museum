@@ -17,12 +17,6 @@ export default function Scene() {
   const { camera, controls } = useThree();
   const controlsRef = useRef();
 
-  const scroll = useScroll();
-
-  const handleResetScroll = () => {
-    scroll.el.scrollTo(0, 0); // Remet le scroll à 0
-  };
-
   return (
     <>
       <Suspense fallback={null}>

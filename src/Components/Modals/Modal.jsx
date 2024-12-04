@@ -1,4 +1,4 @@
-import {Scroll} from "@react-three/drei";
+import {Html, Scroll} from "@react-three/drei";
 
 export default function Modal({children, position, closeModal}) {
 

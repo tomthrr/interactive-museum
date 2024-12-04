@@ -14,12 +14,28 @@ function Cartel({ painting }) {
 
   const openModal = () => {
     setOpen(true);
+    const container = document.querySelector('.modal-container');
+    if (container) {
+      gsap.to(container, {
+        display: "block",
+        opacity: 1,
+        duration: 0.5,
+        ease: "power2.out"
+      })
+    }
   }
 
   const closeModal = () => {
     setOpen(false);
     const container = document.querySelector('.modal-container');
-    if (container) container.style.display = 'none';
+    if (container) {
+      gsap.to(container, {
+        display: "none",
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out"
+      })
+    }
   }
 
   return (
@@ -32,9 +48,7 @@ function Cartel({ painting }) {
         <planeGeometry attach="geometry" args={[1 / 5, 1 / 5]}/>
         <meshBasicMaterial attach="material" map={texture} toneMapped={false} side={THREE.DoubleSide}/>
       </mesh>
-      {
-          open && <CartelModal painting={painting} closeModal={closeModal} />
-      }
+      <CartelModal painting={painting} closeModal={closeModal} />
     </>
   )
 }
