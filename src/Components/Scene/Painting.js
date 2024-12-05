@@ -9,32 +9,19 @@ import {paintingsInfos} from "@/data/paintings-infos";
 import CartelModal from "@/Components/Modals/CartelModal/CartelModal";
 
 function Cartel({ painting }) {
-  const [open, setOpen] = useState(false);
   const texture = useLoader(THREE.TextureLoader, '/pictures_monet/' + painting.cartel.cartelPath);
 
-  const openModal = () => {
-    setOpen(true);
-    const container = document.querySelector('.modal-container');
-    if (container) {
-      gsap.to(container, {
-        display: "block",
-        opacity: 1,
-        duration: 0.5,
-        ease: "power2.out"
-      })
-    }
-  }
+  const nameContainer = `.modal-container-${painting.id}`
 
-  const closeModal = () => {
-    setOpen(false);
-    const container = document.querySelector('.modal-container');
+  const openModal = () => {
+    const container = document.querySelector(nameContainer);
     if (container) {
       gsap.to(container, {
-        display: "none",
-        opacity: 0,
-        duration: 0.5,
+        opacity: 1,
+        display: "flex",
+        duration: 1,
         ease: "power2.out"
-      })
+      });
     }
   }
 
@@ -48,7 +35,6 @@ function Cartel({ painting }) {
         <planeGeometry attach="geometry" args={[1 / 5, 1 / 5]}/>
         <meshBasicMaterial attach="material" map={texture} toneMapped={false} side={THREE.DoubleSide}/>
       </mesh>
-      <CartelModal painting={painting} closeModal={closeModal} />
     </>
   )
 }
@@ -73,52 +59,6 @@ export default function Painting() {
 
   const [isFocus, setIsFocus] = useState(false)
   const [_positionCam, setPosition] = useState(new THREE.Vector3())
-
-
-  // const handleImageClick = (mesh, cameraPos) => {
-  //   // Sauvegarder la position initiale de la caméra au premier clic
-  //   if (!_positionCam.length()) {
-  //     setPosition(camera.position.clone()); // Clone la position initiale
-  //   }
-  //
-  //   if (!isFocus) {
-  //     // Zoom sur le tableau
-  //     gsap.to(camera.position, {
-  //       x: cameraPos.x,
-  //       y: cameraPos.y,
-  //       z: cameraPos.z,
-  //       duration: 1,
-  //       ease: "power1.inOut",
-  //       onStart: () => {
-  //         // Centrer temporairement les contrôles sur le tableau
-  //         const boundingBox = new THREE.Box3().setFromObject(mesh);
-  //         const center = boundingBox.getCenter(new THREE.Vector3());
-  //         controls.target.copy(center);
-  //         controls.update();
-  //       },
-  //       onComplete: () => {
-  //         // Permettre la navigation après le zoom
-  //         setIsFocus(true); // La caméra est maintenant en focus sur le tableau
-  //       }
-  //     });
-  //   } else {
-  //     // Retour à la position initiale
-  //     gsap.to(camera.position, {
-  //       x: _positionCam.x,
-  //       y: _positionCam.y,
-  //       z: _positionCam.z,
-  //       duration: 1,
-  //       ease: "power1.inOut",
-  //       onStart: () => {
-  //         controls.target.set(0, 0, 0);
-  //         controls.update();
-  //       },
-  //       onComplete: () => {
-  //         setIsFocus(false);
-  //       }
-  //     });
-  //   }
-  // };
 
   // useHelper(cameraCopy, THREE.CameraHelper)
 

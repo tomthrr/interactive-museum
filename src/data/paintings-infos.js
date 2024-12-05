@@ -7,6 +7,7 @@ import * as THREE from 'three';
 
 export const paintingsInfos = [
   {
+    id: 'haystack-snow',
     name: 'haystack-snow-effect.jpg',
     title: 'Haystacks (Effect of Snow and Sun)',
     made: '1891',
@@ -36,6 +37,7 @@ export const paintingsInfos = [
     }
   },
   {
+    id: 'spring',
     name: 'spring.jpg',
     title: 'Spring (Fruit Trees in Bloom)',
     made: '1873',
@@ -62,6 +64,7 @@ export const paintingsInfos = [
     }
   },
   {
+    id: 'poppy-fields-argenteuil',
     name: 'poppy-fields-argenteuil.jpg',
     title: 'Poppy Fields near Argenteuil',
     made: '1875',
@@ -87,6 +90,7 @@ export const paintingsInfos = [
     }
   },
   {
+    id: 'bodmer',
     name: 'bodmer.jpg',
     title: 'The Bodmer Oak, Fontainebleau Forest',
     made: '1865',
@@ -113,6 +117,7 @@ export const paintingsInfos = [
     }
   },
   {
+    id: 'camille-monet',
     name: 'camille-monet.jpg',
     title: 'Camille Monet (1847–1879) on a Garden Bench',
     made: '1873',
@@ -140,6 +145,7 @@ export const paintingsInfos = [
     }
   },
   {
+    id: 'the-monet-family',
     name: 'the-monet-family.jpg',
     title: 'The Monet Family in Their Garden at Argenteuil',
     made: '1874',
@@ -166,6 +172,7 @@ export const paintingsInfos = [
     }
   },
   {
+    id: 'garden-saint-adresse',
     name: 'garden-saint-adresse.jpg',
     title: 'Garden at Sainte-Adresse',
     made: '1867',
@@ -193,6 +200,7 @@ export const paintingsInfos = [
     }
   },
   {
+    id: 'nervia',
     name: 'nervia.jpg',
     title: 'The Valley of the Nervia',
     made: '1884',
@@ -219,6 +227,7 @@ export const paintingsInfos = [
     }
   },
   {
+    id: 'la-grenouillere',
     name: 'la-grenouillere.jpg',
     title: 'La Grenouillère',
     made: '1869',
@@ -244,6 +253,7 @@ export const paintingsInfos = [
     }
   },
   {
+    id: 'green-wave',
     name: 'green-wave.jpg',
     title: 'The Green Wave',
     made: '1866–67',

@@ -1,10 +1,12 @@
 import {Html, Scroll} from "@react-three/drei";
 
-export default function Modal({children, position, closeModal}) {
+export default function Modal({children, modalRef, nameContainer, closeModal}) {
 
   return (
-    <Scroll html className={"modal-container"} position={position}>
+    <div className={`modal-container-${nameContainer} modal-container`}>
       <div
+        id={"modal-cartel"}
+        ref={modalRef}
         className={"background"}
         onClick={() => closeModal()}
       >
@@ -12,6 +14,6 @@ export default function Modal({children, position, closeModal}) {
           {children}
         </div>
       </div>
-    </Scroll>
+    </div>
   )
 }

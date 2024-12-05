@@ -17,10 +17,6 @@ export default function Cartel({ painting }) {
     if (container) container.style.display = 'none';
   }
 
-  if (painting.title === "Haystacks (Effect of Snow and Sun)") {
-    console.log(painting.cartel.positionCartel)
-  }
-
   return (
     <>
       {
