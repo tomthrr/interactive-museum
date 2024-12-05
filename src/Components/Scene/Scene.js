@@ -37,7 +37,7 @@ export default function Scene() {
         backgroundBlurriness={0.02}
         />
 
-      <axesHelper position={[0, 1, 0]} args={[5]} />
+      {/*<axesHelper position={[0, 1, 0]} args={[5]} />*/}
     </>
   )
 }

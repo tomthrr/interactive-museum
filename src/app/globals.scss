@@ -20,6 +20,41 @@ h1, h2, h3, h4, p {
 }
 
 /**
+ * Scrollbar
+ */
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  border: solid 3px transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 10px 10px #8294C4;
+  border: solid 3px transparent;
+  border-radius: 10rem;
+}
+
+::-webkit-scrollbar-track-piece:start {
+  box-shadow: inset 0 0 10px 10px #DBDFEA;
+  border: solid 3px transparent;
+  border-top-left-radius: 10rem;
+  border-top-right-radius: 10rem;
+  margin-top: 30vh;
+}
+
+::-webkit-scrollbar-track-piece:end {
+  border-bottom-left-radius: 10rem;
+  border-bottom-right-radius: 10rem;
+  border: solid 3px transparent;
+  box-shadow: inset 0 0 10px 10px #DBDFEA;
+  margin-bottom: 30vh;
+}
+
+
+/**
  * Modal
  */
 
