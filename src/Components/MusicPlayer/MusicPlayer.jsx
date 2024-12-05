@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, forwardRef, useImperativeHandle } from "react";
 import styles from "./styles.module.scss";
 
-export default function MusicPlayer() {
+// Utilisation de forwardRef pour exposer une méthode depuis MusicPlayer
+const MusicPlayer = forwardRef((props, ref) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlay = () => {
@@ -27,16 +28,21 @@ export default function MusicPlayer() {
     }
   };
 
+  // Expose la méthode playMusic à travers la référence
+  useImperativeHandle(ref, () => ({
+    playMusic: handlePlay,
+  }));
+
   return (
     <div className="player">
       {!isPlaying ? (
         <>
-          <button className={styles.startButton} onClick={() => handlePlay()}>
+          <button className={styles.startButton} onClick={handlePlay}>
             Play
           </button>
         </>
       ) : (
-        <button className={styles.startButton} onClick={() => handleStop()}>
+        <button className={styles.startButton} onClick={handleStop}>
           Stop
         </button>
       )}
@@ -48,4 +54,6 @@ export default function MusicPlayer() {
       ></audio>
     </div>
   );
-}
+});
+
+export default MusicPlayer;

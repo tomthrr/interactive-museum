@@ -6,6 +6,7 @@ import RestartButton from "@/Components/Buttons/RestartButton";
 import CartelModal from "@/Components/Modals/CartelModal/CartelModal";
 import {paintingsInfos} from "@/data/paintings-infos";
 import MusicPlayer from "@/Components/MusicPlayer/MusicPlayer";
+import OverlayStart from "@/Components/OverlayStart/OverlayStart";
 
 const Scene = dynamic(() => import('@/components/Scene'), {
   ssr: false,
@@ -16,7 +17,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <Scene/>
-      <MusicPlayer />
+      <OverlayStart />
       <RestartButton />
       {
         paintingsInfos.map((painting, index) => (

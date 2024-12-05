@@ -1,0 +1,48 @@
+.overlayContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100vh;
+  background: rgba(219, 223, 234, 0.6);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+
+  .startButton {
+    width: fit-content;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    padding: 2rem;
+    border-radius: 4rem;
+    background-color: rgba(0, 0, 0, 0.95);
+    box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.35);
+    animation: pulseAura 2s infinite;
+    transition: scale 0.2s ease-in-out;
+
+    &:hover {
+      scale: 1.05;
+    }
+  }
+}
+
+/* Animation de pulsation */
+@keyframes pulseAura {
+  0% {
+    box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 18px 13px rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.35);
+  }
+}
