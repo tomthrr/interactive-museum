@@ -13,7 +13,7 @@ import {useFrame, useThree} from "@react-three/fiber";
 import {Suspense, useEffect, useRef, useState} from "react";
 import gsap from 'gsap'
 
-export default function Scene() {
+export default function Scene({start}) {
   const { camera, controls } = useThree();
   const controlsRef = useRef();
 
@@ -36,8 +36,6 @@ export default function Scene() {
         preset={"studio"}
         backgroundBlurriness={0.02}
         />
-
-      {/*<axesHelper position={[0, 1, 0]} args={[5]} />*/}
     </>
   )
 }

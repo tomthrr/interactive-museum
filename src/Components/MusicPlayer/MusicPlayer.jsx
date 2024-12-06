@@ -37,14 +37,14 @@ const MusicPlayer = forwardRef((props, ref) => {
     <div className="player">
       {!isPlaying ? (
         <>
-          <button className={styles.startButton} onClick={handlePlay}>
-            Play
-          </button>
+          <div className={styles.startButton} onClick={handlePlay}>
+            Sound
+          </div>
         </>
       ) : (
-        <button className={styles.startButton} onClick={handleStop}>
-          Stop
-        </button>
+        <div className={styles.startButton} onClick={handleStop}>
+          No sound
+        </div>
       )}
       <audio
         id="classic-audio"
