@@ -28,21 +28,31 @@ const MusicPlayer = forwardRef((props, ref) => {
     }
   };
 
+  const startExperience = () => {
+    if (isPlaying) {
+      handlePlay();
+    }
+  }
+
+  const toggleIsPlaying = () => {
+    setIsPlaying(!isPlaying);
+  }
+
   // Expose la méthode playMusic à travers la référence
   useImperativeHandle(ref, () => ({
-    playMusic: handlePlay,
+    playMusic: startExperience,
   }));
 
   return (
     <div className="player">
       {!isPlaying ? (
         <>
-          <div className={styles.startButton} onClick={handlePlay}>
+          <div className={styles.startButton} onClick={toggleIsPlaying}>
             <AnimatedWaveButton intensity={60} />
           </div>
         </>
       ) : (
-        <div className={styles.startButton} onClick={handleStop}>
+        <div className={styles.startButton} onClick={toggleIsPlaying}>
           <AnimatedWaveButton intensity={180} />
         </div>
       )}
