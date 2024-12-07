@@ -4,5 +4,10 @@
   align-items: center;
   cursor: pointer;
   z-index: 1000;
-  border-radius: 4rem;
+
+  .overlay {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+  }
 }

@@ -23,6 +23,7 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+
     h1 {
       font-family: "Baskervville", serif;
       font-weight: lighter;
@@ -34,23 +35,30 @@
     }
   }
 
-  .startButton {
-    width: fit-content;
-    border: 1px solid rgba(0, 0, 0, 0.18);
-    padding: 2rem;
-    border-radius: 4rem;
-    background-color: rgba(0, 0, 0, 0.95);
-    box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.35);
-    animation: pulseAura 2s infinite;
-    transition: scale 0.2s ease-in-out;
+  .interactionsContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
 
-    &:hover {
-      scale: 1.05;
+    .startButton {
+      width: fit-content;
+      border: 1px solid rgba(0, 0, 0, 0.18);
+      padding: 2rem;
+      border-radius: 4rem;
+      background-color: rgba(0, 0, 0, 0.95);
+      box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.35);
+      animation: pulseAura 2s infinite;
+      transition: scale 0.2s ease-in-out;
+
+      &:hover {
+        scale: 1.05;
+      }
     }
   }
 }
 
-/* Animation de pulsation */
 @keyframes pulseAura {
   0% {
     box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.35);

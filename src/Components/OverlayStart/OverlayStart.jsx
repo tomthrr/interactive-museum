@@ -8,6 +8,7 @@ export default function OverlayStart({onStarted}) {
   const musicPlayerRef = useRef();
   const mainTitle = useRef();
   const subTitle = useRef();
+  const interactionsContainer = useRef();
 
   const handleStart = () => {
     if (!overlayRef.current) return;
@@ -31,15 +32,24 @@ export default function OverlayStart({onStarted}) {
       duration: 1,
       ease: "power3.out",
     })
-      .to(
-        subTitle.current,
-        {
-          opacity: 1,
-          duration: 1,
-          ease: "power3.out",
-        },
-        "-=0.5" // Superpose cette animation à la moitié de la précédente
-      );
+    .to(
+      subTitle.current,
+      {
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+      },
+      "-=0.5"
+    )
+    .to(
+      interactionsContainer.current,
+      {
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+      },
+      "-=0.5"
+    )
   }, []);
 
   return (
@@ -49,11 +59,13 @@ export default function OverlayStart({onStarted}) {
           <h1 ref={mainTitle}>CLAUDE MONET</h1>
           <h2 ref={subTitle} className={styles.title}>Start the an amazing experience</h2>
         </div>
-        <div className={`button ${styles.startButton}`}
-             onClick={() => handleStart()}>
-          Go
+        <div className={styles.interactionsContainer} ref={interactionsContainer}>
+          <div className={`button ${styles.startButton}`}
+               onClick={() => handleStart()}>
+            Go
+          </div>
+          <MusicPlayer ref={musicPlayerRef}/>
         </div>
-        <MusicPlayer ref={musicPlayerRef} />
       </div>
     </div>
   )

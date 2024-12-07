@@ -20,6 +20,42 @@ h1, h2, h3, h4, p {
   margin: 0;
 }
 
+
+svg {
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+}
+
+#poly {
+  stroke: black;
+  fill: none;
+  stroke-width: 5px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 24, 12, 6, 12;
+}
+
+
+#arrowHead {
+  stroke: black;
+  fill: none;
+  stroke-width: 5px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+marker {
+  overflow: visible;
+}
+
+.filter-green {
+  width: 0;
+  height: 100px;
+  filter: invert(0%) sepia(85%) saturate(7439%) hue-rotate(177deg) brightness(85%) contrast(113%);
+  visibility: visible;
+}
+
 /**
  * Scrollbar
  */

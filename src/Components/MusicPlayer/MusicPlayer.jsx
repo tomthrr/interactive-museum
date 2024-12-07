@@ -1,7 +1,7 @@
 import { useState, forwardRef, useImperativeHandle } from "react";
 import styles from "./styles.module.scss";
+import AnimatedWaveButton from "@/Components/MusicPlayer/AnimatedWaveButton";
 
-// Utilisation de forwardRef pour exposer une méthode depuis MusicPlayer
 const MusicPlayer = forwardRef((props, ref) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -38,12 +38,12 @@ const MusicPlayer = forwardRef((props, ref) => {
       {!isPlaying ? (
         <>
           <div className={styles.startButton} onClick={handlePlay}>
-            Sound
+            <AnimatedWaveButton intensity={60} />
           </div>
         </>
       ) : (
         <div className={styles.startButton} onClick={handleStop}>
-          No sound
+          <AnimatedWaveButton intensity={180} />
         </div>
       )}
       <audio

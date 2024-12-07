@@ -9,29 +9,38 @@
   align-items: center;
   z-index: 1000;
   background-color: rgba(219, 223, 234, 1);
-}
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
 
-.progressContainer {
-  text-align: center;
-}
+  .progressContainer {
+    text-align: center;
 
-.progressBar {
-  position: relative;
-  width: 300px;
-  height: 10px;
-  background-color: #444;
-  border-radius: 5px;
-  overflow: hidden;
-  margin-bottom: 10px;
-}
+    svg {
+      width: 100%;
+      height: auto;
+      transform-origin: left;
+      clip-path: inset(0 100% 0 0);
+    }
+  }
 
-.progress {
-  height: 100%;
-  background-color: #3498db; // Couleur de progression
-  transition: width 0.2s ease; // Transition fluide
-}
+  .progressBar {
+    position: relative;
+    width: 300px;
+    height: 10px;
+    background-color: #444;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
 
-.progressText {
-  font-size: 14px;
-  margin-top: 5px;
+  .progress {
+    height: 100%;
+    background-color: #3498db;
+    transition: width 0.2s ease;
+  }
+
+  .progressText {
+    font-size: 14px;
+    margin-top: 5px;
+  }
 }
