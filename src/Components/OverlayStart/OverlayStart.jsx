@@ -57,7 +57,7 @@ export default function OverlayStart({onStarted}) {
       <div className={styles.container}>
         <div className={styles.header}>
           <h1 ref={mainTitle}>CLAUDE MONET</h1>
-          <h2 ref={subTitle} className={styles.title}>Start the an amazing experience</h2>
+          <h2 ref={subTitle} className={styles.title}>Immerse yourself in the luminous world of Claude Monet and explore his masterpieces at your own pace</h2>
         </div>
         <div className={styles.interactionsContainer} ref={interactionsContainer}>
           <div className={`button ${styles.startButton}`}

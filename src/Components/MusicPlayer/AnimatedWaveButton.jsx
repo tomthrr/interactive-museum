@@ -44,7 +44,7 @@ export default function AnimatedWaveButton({intensity}) {
   }, []);
 
   return (
-    <svg id="mainSVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+    <svg id="mainSVG" className={"soundButton"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
       <defs>
         <marker id="arrow" width="35" height="50" viewBox="0 0 35 50" markerWidth="35" markerHeight="40" refX="5"
                 refY="25" orient="auto" markerUnits="userSpaceOnUse">
