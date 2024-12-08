@@ -2,15 +2,60 @@ import * as THREE from 'three';
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import {Suspense, useEffect, useRef, useState} from "react";
 import gsap from "gsap";
-import {Html, PerspectiveCamera, Scroll, useHelper} from "@react-three/drei";
-import styles from "@/app/page.module.scss";
-import {useControls} from "leva";
 import {paintingsInfos} from "@/data/paintings-infos";
-import CartelModal from "@/Components/Modals/CartelModal/CartelModal";
+
+import { extend } from "@react-three/fiber";
+import { ShaderMaterial, DoubleSide } from "three";
+
+class GlowMaterial extends ShaderMaterial {
+  constructor() {
+    super({
+      uniforms: {
+        uTime: { value: 0 },
+        uTexture: { value: null },
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform float uTime;
+        uniform sampler2D uTexture;
+        varying vec2 vUv;
+        
+        void main() {
+          // Charge la texture
+          vec4 textureColor = texture2D(uTexture, vUv);
+        
+          // Ligne diagonale
+          float linePosition = fract(vUv.x + vUv.y - uTime * 0.5); // Position de la ligne
+          float line = smoothstep(0.48, 0.52, linePosition);       // Ligne équilibrée
+        
+          // Ajouter une transition douce autour de la ligne, effet blur
+          float glow = smoothstep(0.3, 0.7, linePosition) - smoothstep(0.5, 0.9, linePosition);
+        
+          // Combiner texture et ligne avec une faible opacité pour l'effet de transparence
+          vec3 finalColor = textureColor.rgb + vec3(glow * 0.3); // Glow
+        
+          gl_FragColor = vec4(finalColor, textureColor.a);
+        }
+      `,
+
+      side: DoubleSide,
+    });
+  }
+}
+
+extend({ GlowMaterial });
+
+extend({ GlowMaterial });
 
 function Cartel({ painting }) {
   const texture = useLoader(THREE.TextureLoader, '/pictures_monet/' + painting.cartel.cartelPath);
-
+  const materialRef = useRef();
   const nameContainer = `.modal-container-${painting.id}`
 
   const openModal = () => {
@@ -25,6 +70,12 @@ function Cartel({ painting }) {
     }
   }
 
+  useFrame(({ clock }) => {
+    if (materialRef.current) {
+      materialRef.current.uniforms.uTime.value = clock.getElapsedTime();
+    }
+  });
+
   return (
     <>
       <mesh
@@ -33,7 +84,8 @@ function Cartel({ painting }) {
         onClick={(e) => openModal()}
       >
         <planeGeometry attach="geometry" args={[1 / 5, 1 / 5]}/>
-        <meshBasicMaterial attach="material" map={texture} toneMapped={false} side={THREE.DoubleSide}/>
+        <glowMaterial ref={materialRef}/>
+        <glowMaterial ref={materialRef} attach="material" uniforms-uTexture-value={texture}/>
       </mesh>
     </>
   )
