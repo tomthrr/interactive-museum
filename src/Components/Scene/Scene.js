@@ -11,10 +11,13 @@ import Painting from "@/Components/Scene/Painting";
 import {Museum} from "@/Components/Scene/Museum";
 import {useFrame, useThree} from "@react-three/fiber";
 import {Suspense, useEffect, useRef, useState} from "react";
-import gsap from 'gsap'
+import gsap from 'gsap';
+import * as THREE from "three";
+import {useControls} from "leva";
+import GradientSphere from "@/Components/Scene/GradientSphere";
 
 export default function Scene({start}) {
-  const { camera, controls } = useThree();
+  const {camera, controls} = useThree();
   const controlsRef = useRef();
 
   return (
@@ -23,6 +26,9 @@ export default function Scene({start}) {
         <ScrollControls pages={10} damping={0.2}>
           <ScrollContent controlsRef={controlsRef}/>
         </ScrollControls>
+      </Suspense>
+      <Suspense fallback={null}>
+        <GradientSphere/>
       </Suspense>
 
       <OrbitControls makeDefault enableZoom={false} ref={controlsRef}/>
@@ -35,12 +41,12 @@ export default function Scene({start}) {
         background={false}
         preset={"studio"}
         backgroundBlurriness={0.02}
-        />
+      />
     </>
   )
 }
 
-function ScrollContent({ controlsRef }) {
+function ScrollContent({controlsRef}) {
   const scroll = useScroll();
   const [isVisible, setIsVisible] = useState(false);
 
@@ -55,10 +61,10 @@ function ScrollContent({ controlsRef }) {
 
     if (offset > 0.2 && !isVisible) {
       setIsVisible(true);
-      gsap.to(button, { opacity: 1, duration: 1, ease: "power2.out" });
+      gsap.to(button, {opacity: 1, duration: 1, ease: "power2.out"});
     } else if (offset <= 0.2 && isVisible) {
       setIsVisible(false);
-      gsap.to(button, { opacity: 0, duration: 1, ease: "power2.out" });
+      gsap.to(button, {opacity: 0, duration: 1, ease: "power2.out"});
     }
   });
 
@@ -76,7 +82,7 @@ function ScrollContent({ controlsRef }) {
 
   return (
     <>
-      <Painting />
+      <Painting/>
       <Museum controlsRef={controlsRef}/>
     </>
   );
